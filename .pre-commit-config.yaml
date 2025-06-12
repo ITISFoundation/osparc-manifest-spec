@@ -30,7 +30,7 @@ repos:
     hooks:
     -   id: validate-manifest
         name: validate manifest
-        entry: ./validate.sh
-        language: script
+        entry: python scripts/validate.py
+        language: python
         files: cad_manifest\.yaml$
-        additional_dependencies: []
+        additional_dependencies: [pyyaml, jsonschema]
