@@ -30,7 +30,6 @@ repos:
     hooks:
     -   id: validate-manifest
         name: validate manifest
-        entry: python scripts/validate.py
-        language: python
+        entry: ./scripts/validate-uvx.sh
+        language: system
         files: cad_manifest\.yaml$
-        additional_dependencies: [pyyaml, jsonschema]

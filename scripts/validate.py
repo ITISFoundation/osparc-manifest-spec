@@ -7,11 +7,13 @@ Uses uv style dependencies.
 Dependencies:
 - pyyaml
 - jsonschema
+
+When used with uv:
+    uv run --with pyyaml --with jsonschema ./scripts/validate.py path/to/manifest.yaml path/to/schema.json
 """
 
 import json
 import sys
-from pathlib import Path
 
 
 def main():
@@ -29,15 +31,15 @@ def main():
 
     try:
         # Dynamically import dependencies
-        import yaml
         import jsonschema
+        import yaml
 
         # Load schema
-        with open(schema_path, "r") as f:
+        with open(schema_path, "r", encoding="utf-8") as f:
             schema = json.load(f)
 
         # Load manifest
-        with open(manifest_path, "r") as f:
+        with open(manifest_path, "r", encoding="utf-8") as f:
             manifest = yaml.safe_load(f)
 
         # Validate
@@ -46,13 +48,20 @@ def main():
         return 0
     except ImportError as e:
         print(f"❌ Missing dependency: {e}", file=sys.stderr)
-        print("Run: uv pip install pyyaml jsonschema", file=sys.stderr)
+        print(
+            "Run: uv run --with pyyaml --with jsonschema ./scripts/validate.py",
+            file=sys.stderr,
+        )
         return 1
     except FileNotFoundError as e:
         print(f"❌ File not found: {e}", file=sys.stderr)
         return 1
-    except Exception as e:
-        print(f"❌ Validation error: {e}", file=sys.stderr)
+    except yaml.YAMLError as e:
+        print(f"❌ YAML parsing error: {e}", file=sys.stderr)
+        return 1
+    except Exception as e:  # pylint: disable=broad-except
+        # We want to catch all errors to provide a clean error message
+        print(f"❌ Unexpected error: {e}", file=sys.stderr)
         return 1
 
 

@@ -20,10 +20,11 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
+      - name: Install UV
         run: |
           pip install uv
-          uv pip install pyyaml jsonschema
 
-      - name: Validate manifest
-        run: python scripts/validate.py cad_manifest.yaml schema/cad_manifest.schema.json
+      - name: Validate manifest using uv
+        run: |
+          # Use uv to manage dependencies inline
+          ./scripts/validate-uvx.sh cad_manifest.yaml schema/cad_manifest.schema.json

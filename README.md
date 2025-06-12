@@ -42,7 +42,20 @@ You can validate your manifest using the provided GitHub Actions workflow or wit
 
 ### Command Line Validation
 
-#### Using standard Python:
+#### Using uv (recommended)
+
+```bash
+# Install uv if not already installed
+pip install uv
+
+# Run validation with automatic dependency management
+./scripts/validate-uvx.sh cad_manifest.yaml schema/cad_manifest.schema.json
+
+# Or directly with uv
+uv run --with pyyaml --with jsonschema ./scripts/validate.py cad_manifest.yaml schema/cad_manifest.schema.json
+```
+
+#### Using standard Python (alternative)
 
 ```bash
 # Install dependencies
@@ -50,30 +63,6 @@ pip install pyyaml jsonschema
 
 # Run the validation script
 python scripts/validate.py cad_manifest.yaml schema/cad_manifest.schema.json
-```
-
-#### Using uv (recommended):
-
-```bash
-# Install uv if not already installed
-pip install uv
-
-# Run with automatic dependency management
-uv pip install pyyaml jsonschema
-python scripts/validate.py cad_manifest.yaml schema/cad_manifest.schema.json
-
-# Or using the uvx wrapper script (automatically installs dependencies)
-./scripts/validate-uvx.sh cad_manifest.yaml schema/cad_manifest.schema.json
-```
-
-### Docker Validation
-
-```bash
-# Build the validation Docker image
-docker build -t cad-manifest-validator .
-
-# Validate a manifest file
-docker run --rm -v /path/to/your/cad_manifest.yaml:/app/cad_manifest.yaml cad-manifest-validator cad_manifest.yaml
 ```
 
 ### Pre-commit Hook
@@ -85,10 +74,9 @@ Add this to your pre-commit config to validate manifest files before commit:
     hooks:
     -   id: validate-manifest
         name: validate manifest
-        entry: python scripts/validate.py
-        language: python
+        entry: ./scripts/validate-uvx.sh
+        language: system
         files: cad_manifest\.yaml$
-        additional_dependencies: [pyyaml, jsonschema]
 ```
 
 ### Development Container
@@ -104,7 +92,6 @@ The container includes:
 - Python 3.12
 - UV for dependency management
 - Pre-commit and other development tools
-- Docker-in-Docker for testing validation in containers
 
 ## Contributing
 
