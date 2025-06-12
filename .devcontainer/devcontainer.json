@@ -1,12 +1,11 @@
 {
   "name": "CAD Manifest Validator",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
-  "postCreateCommand": "pip install uv && uv pip install pyyaml jsonschema pre-commit",
+  "postCreateCommand": "pip install uv && uv pip install jsonschema pre-commit",
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-python.python",
-        "redhat.vscode-yaml"
+        "ms-python.python"
       ],
       "settings": {
         "editor.formatOnSave": true,

@@ -5,11 +5,10 @@ Validate a CAD manifest against a schema.
 Uses uv style dependencies.
 
 Dependencies:
-- pyyaml
 - jsonschema
 
 When used with uv:
-    uv run --with pyyaml --with jsonschema ./scripts/validate.py path/to/manifest.yaml path/to/schema.json
+    uv run --with jsonschema ./scripts/validate.py path/to/manifest.json path/to/schema.json
 """
 
 import json
@@ -20,7 +19,7 @@ def main():
     """Validate a manifest file against a schema."""
     # Parse arguments
     if len(sys.argv) < 2:
-        manifest_path = "cad_manifest.yaml"
+        manifest_path = "cad_manifest.json"
     else:
         manifest_path = sys.argv[1]
 
@@ -32,7 +31,6 @@ def main():
     try:
         # Dynamically import dependencies
         import jsonschema
-        import yaml
 
         # Load schema
         with open(schema_path, "r", encoding="utf-8") as f:
@@ -40,7 +38,7 @@ def main():
 
         # Load manifest
         with open(manifest_path, "r", encoding="utf-8") as f:
-            manifest = yaml.safe_load(f)
+            manifest = json.load(f)
 
         # Validate
         jsonschema.validate(instance=manifest, schema=schema)
@@ -49,15 +47,15 @@ def main():
     except ImportError as e:
         print(f"❌ Missing dependency: {e}", file=sys.stderr)
         print(
-            "Run: uv run --with pyyaml --with jsonschema ./scripts/validate.py",
+            "Run: uv run --with jsonschema ./scripts/validate.py",
             file=sys.stderr,
         )
         return 1
     except FileNotFoundError as e:
         print(f"❌ File not found: {e}", file=sys.stderr)
         return 1
-    except yaml.YAMLError as e:
-        print(f"❌ YAML parsing error: {e}", file=sys.stderr)
+    except json.JSONDecodeError as e:
+        print(f"❌ JSON parsing error: {e}", file=sys.stderr)
         return 1
     except Exception as e:  # pylint: disable=broad-except
         # We want to catch all errors to provide a clean error message
