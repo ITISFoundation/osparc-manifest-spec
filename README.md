@@ -18,7 +18,7 @@ The JSON Schema definition is available at:
 ## Usage
 
 1. Add a `cad_manifest.json` file to your CAD repository root
-2. Include the GitHub Actions workflow for validation
+2. Include the GitHub Actions workflow for validation (see below)
 3. Structure your manifest according to the schema
 
 ### Example Manifest
@@ -48,46 +48,47 @@ The JSON Schema definition is available at:
 
 ## Validation
 
-You can validate your manifest using the provided GitHub Actions workflow or with local tools:
+To validate your manifest, add the GitHub Actions workflow to your repository:
 
-### Command Line Validation
+### GitHub Actions Validation
 
-#### Using uv (recommended)
-
-```bash
-# Install uv if not already installed
-pip install uv
-
-# Run validation with automatic dependency management
-./scripts/validate-uvx.sh cad_manifest.json schema/cad_manifest.schema.json
-
-# Or directly with uv
-uv run --with jsonschema ./scripts/validate.py cad_manifest.json schema/cad_manifest.schema.json
-```
-
-#### Using standard Python (alternative)
-
-```bash
-# Install dependencies
-pip install jsonschema
-
-# Run the validation script
-python scripts/validate.py cad_manifest.json schema/cad_manifest.schema.json
-```
-
-### Pre-commit Hook
-
-Add this to your pre-commit config to validate manifest files before commit:
+Create a file `.github/workflows/validate-cad-manifest.yml` in your repository with the following content:
 
 ```yaml
--   repo: local
-    hooks:
-    -   id: validate-manifest
-        name: validate manifest
-        entry: ./scripts/validate-uvx.sh
-        language: system
-        files: cad_manifest\.json$
+name: Validate CAD Manifest
+
+on:
+  push:
+    paths:
+      - 'cad_manifest.json'
+  pull_request:
+    paths:
+      - 'cad_manifest.json'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - run: pip install jsonschema
+
+      - name: Download schema
+        run: |
+          curl -Lo schema.json https://itisfoundation.github.io/osparc-manifest-spec/schema/cad_manifest.schema.json
+
+      - name: Validate
+        run: |
+          python -c "import json, jsonschema; jsonschema.validate(json.load(open('cad_manifest.json')), json.load(open('schema.json'))); print('✅ Valid manifest')"
 ```
+
+This workflow will automatically validate your manifest file against the latest schema whenever it changes or when manually triggered.
 
 ### Development Container
 
