@@ -17,23 +17,33 @@ The JSON Schema definition is available at:
 
 ## Usage
 
-1. Add a `cad_manifest.yaml` file to your CAD repository root
+1. Add a `cad_manifest.json` file to your CAD repository root
 2. Include the GitHub Actions workflow for validation
 3. Structure your manifest according to the schema
 
 ### Example Manifest
 
-```yaml
-manifest_version: "1.0"
-repository: "https://github.com/YourOrg/your-cad-repo"
-components:
-  - name: Component1
-    description: Description of component
-    files:
-      - path: cad/Component1.SLDASM
-        type: solidworks_assembly
-      - path: cad/Component1.step
-        type: step_export
+```json
+{
+  "manifest_version": "1.0",
+  "repository": "https://github.com/YourOrg/your-cad-repo",
+  "components": [
+    {
+      "name": "Component1",
+      "description": "Description of component",
+      "files": [
+        {
+          "path": "cad/Component1.SLDASM",
+          "type": "solidworks_assembly"
+        },
+        {
+          "path": "cad/Component1.step",
+          "type": "step_export"
+        }
+      ]
+    }
+  ]
+}
 ```
 
 ## Validation
@@ -49,20 +59,20 @@ You can validate your manifest using the provided GitHub Actions workflow or wit
 pip install uv
 
 # Run validation with automatic dependency management
-./scripts/validate-uvx.sh cad_manifest.yaml schema/cad_manifest.schema.json
+./scripts/validate-uvx.sh cad_manifest.json schema/cad_manifest.schema.json
 
 # Or directly with uv
-uv run --with pyyaml --with jsonschema ./scripts/validate.py cad_manifest.yaml schema/cad_manifest.schema.json
+uv run --with jsonschema ./scripts/validate.py cad_manifest.json schema/cad_manifest.schema.json
 ```
 
 #### Using standard Python (alternative)
 
 ```bash
 # Install dependencies
-pip install pyyaml jsonschema
+pip install jsonschema
 
 # Run the validation script
-python scripts/validate.py cad_manifest.yaml schema/cad_manifest.schema.json
+python scripts/validate.py cad_manifest.json schema/cad_manifest.schema.json
 ```
 
 ### Pre-commit Hook
@@ -76,7 +86,7 @@ Add this to your pre-commit config to validate manifest files before commit:
         name: validate manifest
         entry: ./scripts/validate-uvx.sh
         language: system
-        files: cad_manifest\.yaml$
+        files: cad_manifest\.json$
 ```
 
 ### Development Container
