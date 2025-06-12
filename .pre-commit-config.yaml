@@ -8,12 +8,6 @@ repos:
     -   id: check-json
     -   id: check-added-large-files
 
--   repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.31.0
-    hooks:
-    -   id: yamllint
-        args: [--format, parsable, --strict]
-
 -   repo: https://github.com/pycqa/isort
     rev: 5.12.0
     hooks:
@@ -32,4 +26,4 @@ repos:
         name: validate manifest
         entry: ./scripts/validate-uvx.sh
         language: system
-        files: cad_manifest\.yaml$
+        files: cad_manifest\.json$
