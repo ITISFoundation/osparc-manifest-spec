@@ -3,10 +3,10 @@ name: Validate CAD Manifest
 on:
   push:
     paths:
-      - 'cad_manifest.yaml'
+      - 'cad_manifest.json'
   pull_request:
     paths:
-      - 'cad_manifest.yaml'
+      - 'cad_manifest.json'
 
 jobs:
   validate:
@@ -27,4 +27,4 @@ jobs:
       - name: Validate manifest using uv
         run: |
           # Use uv to manage dependencies inline
-          ./scripts/validate-uvx.sh cad_manifest.yaml schema/cad_manifest.schema.json
+          ./scripts/validate-uvx.sh cad_manifest.json schema/cad_manifest.schema.json
