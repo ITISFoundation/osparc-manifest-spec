@@ -4,7 +4,7 @@ This repository contains the schema specification for CAD manifests used in oSPA
 
 ## Purpose
 
-The oSPARC CAD Manifest Specification defines a standard way to describe CAD components and their associated files in a repository. This enables:
+The oSPARC CAD Manifest Specification defines a standard way to describe CAD components and their associated files in an external repository. This enables:
 
 - Consistent tracking of CAD files across projects
 - Automated validation of repository contents
