@@ -20,7 +20,7 @@ jobs:
         id: get_schema
         uses: sergeysova/jq-action@v2
         with:
-          cmd: 'jq -r ."$schema" examples/cad_manifest.json'
+          cmd: 'jq -r ."$schema" cad_manifest.json'
 
       - name: Validate with Sourcemeta JSON Schema
         uses: sourcemeta/jsonschema@v9.2.1
