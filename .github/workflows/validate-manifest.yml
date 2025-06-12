@@ -21,10 +21,9 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install pyyaml jsonschema
-
-      - name: Make validation script executable
-        run: chmod +x ./validate.sh
+        run: |
+          pip install uv
+          uv pip install pyyaml jsonschema
 
       - name: Validate manifest
-        run: ./validate.sh cad_manifest.yaml schema/cad_manifest.schema.json
+        run: python scripts/validate.py cad_manifest.yaml schema/cad_manifest.schema.json

@@ -42,12 +42,28 @@ You can validate your manifest using the provided GitHub Actions workflow or wit
 
 ### Command Line Validation
 
+#### Using standard Python:
+
 ```bash
 # Install dependencies
 pip install pyyaml jsonschema
 
 # Run the validation script
-./validate.sh cad_manifest.yaml schema/cad_manifest.schema.json
+python scripts/validate.py cad_manifest.yaml schema/cad_manifest.schema.json
+```
+
+#### Using uv (recommended):
+
+```bash
+# Install uv if not already installed
+pip install uv
+
+# Run with automatic dependency management
+uv pip install pyyaml jsonschema
+python scripts/validate.py cad_manifest.yaml schema/cad_manifest.schema.json
+
+# Or using the uvx wrapper script (automatically installs dependencies)
+./scripts/validate-uvx.sh cad_manifest.yaml schema/cad_manifest.schema.json
 ```
 
 ### Docker Validation
@@ -57,7 +73,7 @@ pip install pyyaml jsonschema
 docker build -t cad-manifest-validator .
 
 # Validate a manifest file
-docker run --rm -v /path/to/your/cad_manifest.yaml:/app/manifest.yaml cad-manifest-validator manifest.yaml
+docker run --rm -v /path/to/your/cad_manifest.yaml:/app/cad_manifest.yaml cad-manifest-validator cad_manifest.yaml
 ```
 
 ### Pre-commit Hook
@@ -69,11 +85,26 @@ Add this to your pre-commit config to validate manifest files before commit:
     hooks:
     -   id: validate-manifest
         name: validate manifest
-        entry: python -c "import yaml, json, jsonschema, sys; schema = json.load(open('schema/cad_manifest.schema.json')); manifest = yaml.safe_load(open(sys.argv[1])); jsonschema.validate(instance=manifest, schema=schema); print('✅ Manifest is valid!')"
+        entry: python scripts/validate.py
         language: python
         files: cad_manifest\.yaml$
         additional_dependencies: [pyyaml, jsonschema]
 ```
+
+### Development Container
+
+This repository includes a devcontainer configuration for VS Code that provides a consistent development environment with all necessary dependencies pre-installed.
+
+To use it:
+1. Install the "Remote - Containers" extension in VS Code
+2. Open the repository in VS Code
+3. Click on the green button in the bottom-left corner and select "Reopen in Container"
+
+The container includes:
+- Python 3.12
+- UV for dependency management
+- Pre-commit and other development tools
+- Docker-in-Docker for testing validation in containers
 
 ## Contributing
 
