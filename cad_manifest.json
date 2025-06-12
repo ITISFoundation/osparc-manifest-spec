@@ -1,35 +1,34 @@
 {
     "$schema": "https://raw.githubusercontent.com/ITISFoundation/osparc-manifest-spec/refs/heads/main/schema/cad_manifest.schema.json",
-    "manifest_version": "0.1",
-    "repository": "https://github.com/CARSSCenter/Sub-mm-Parylene-Cuff-Electrode",
+    "repository": "https://github.com/example-org/example-cad-repo",
     "components": [
-        {
-            "name": "Electrode",
-            "description": "Full electrode assembly",
-            "files": [
-                {
-                    "path": "cad/assembly.SLDASM",
-                    "type": "solidworks_assembly"
-                },
-                {
-                    "path": "exports/electrode.step",
-                    "type": "step_export"
-                }
-            ]
-        },
-        {
+      {
+        "name": "Electrode",
+        "type": "assembly",
+        "description": "Main electrode assembly including body and casing.",
+        "files": [
+          { "path": "cad/Electrode.SLDASM", "type": "solidworks_assembly" },
+          { "path": "cad/Electrode.step", "type": "step_export" }
+        ],
+        "components": [
+          {
             "name": "Electrode_Body",
-            "description": "Main body of the electrode",
+            "type": "part",
+            "description": "The primary contact region of the electrode.",
             "files": [
-                {
-                    "path": "cad/body.SLDPRT",
-                    "type": "solidworks_part"
-                },
-                {
-                    "path": "exports/body.step",
-                    "type": "step_export"
-                }
+              { "path": "cad/Electrode_Body.SLDPRT", "type": "solidworks_part" },
+              { "path": "exports/Electrode_Body.step", "type": "step_export" }
             ]
-        }
+          },
+          {
+            "name": "Electrode_Casing",
+            "type": "part",
+            "description": "Protective casing for the electrode body.",
+            "files": [
+              { "path": "cad/Electrode_Casing.SLDPRT", "type": "solidworks_part" }
+            ]
+          }
+        ]
+      }
     ]
-}
+  }

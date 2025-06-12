@@ -1,87 +1,140 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://itisfoundation.github.io/osparc-manifest-spec/schema/cad_manifest.schema.json",
-  "title": "CAD Manifest",
-  "description": "A manifest file that defines components and their associated CAD files in a repository.",
-  "type": "object",
-  "required": ["manifest_version", "components"],
-  "properties": {
-    "manifest_version": {
-      "type": "string",
-      "description": "The version of the manifest schema.",
-      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$",
-      "examples": ["1.0"]
-    },
-    "repository": {
-      "type": "string",
-      "description": "The URL of the repository containing the CAD files.",
-      "format": "uri",
-      "examples": ["https://github.com/ITISFoundation/osparc-manifest-spec"]
-    },
-    "components": {
-      "type": "array",
-      "description": "List of components included in this CAD project.",
-      "items": {
-        "type": "object",
-        "required": ["name", "files"],
-        "properties": {
-          "name": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://itisfoundation.github.io/osparc-manifest-spec/schema/cad_manifest.schema.json",
+    "title": "osparc CAD Manifest",
+    "schema_version": "1.0.0",
+    "description": "Schema for describing structured collections of CAD components and their file representations in external repositories.",
+    "type": "object",
+    "required": [
+        "repository",
+        "components"
+    ],
+    "properties": {
+        "repository": {
             "type": "string",
-            "description": "The unique name of the component.",
-            "examples": ["Electrode"]
-          },
-          "description": {
-            "type": "string",
-            "description": "A brief description of the component.",
-            "examples": ["Main electrode assembly"]
-          },
-          "files": {
+            "description": "The URL of the repository containing the CAD files.",
+            "format": "uri"
+        },
+        "components": {
             "type": "array",
-            "description": "List of files associated with this component.",
+            "description": "Top-level components in this CAD project.",
+            "minItems": 1,
             "items": {
-              "type": "object",
-              "required": ["path", "type"],
-              "properties": {
-                "path": {
-                  "type": "string",
-                  "description": "Relative path to the file in the repository.",
-                  "examples": ["cad/Electrode.SLDASM"]
+                "$ref": "#/$defs/component"
+            }
+        }
+    },
+    "$defs": {
+        "component": {
+            "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                    "assembly": "#/$defs/assembly",
+                    "part": "#/$defs/part"
+                }
+            },
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/assembly"
+                },
+                {
+                    "$ref": "#/$defs/part"
+                }
+            ]
+        },
+        "assembly": {
+            "type": "object",
+            "required": [
+                "name",
+                "type",
+                "description",
+                "files",
+                "components"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Unique identifier for the component"
                 },
                 "type": {
-                  "type": "string",
-                  "description": "The type of the file.",
-                  "enum": ["solidworks_part", "solidworks_assembly", "step_export"],
-                  "examples": ["step_export"]
+                    "const": "assembly"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "files": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "path",
+                            "type"
+                        ],
+                        "properties": {
+                            "path": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "solidworks_part",
+                                    "solidworks_assembly",
+                                    "step_export"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "components": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/component"
+                    }
                 }
-              }
             }
-          }
-        }
-      }
-    }
-  },
-  "examples": [
-    {
-      "manifest_version": "1.0",
-      "repository": "https://github.com/ITISFoundation/osparc-manifest-spec",
-      "components": [
-        {
-          "name": "Electrode",
-          "description": "Main electrode assembly",
-          "files": [
-            {"path": "cad/Electrode.SLDASM", "type": "solidworks_assembly"},
-            {"path": "cad/Electrode.step", "type": "step_export"}
-          ]
         },
-        {
-          "name": "Electrode_Body",
-          "description": "Core part of the electrode structure",
-          "files": [
-            {"path": "cad/Electrode_Body.SLDPRT", "type": "solidworks_part"},
-            {"path": "cad/Electrode_Body.step", "type": "step_export"}
-          ]
+        "part": {
+            "type": "object",
+            "required": [
+                "name",
+                "type",
+                "description",
+                "files"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "const": "part"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "files": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "path",
+                            "type"
+                        ],
+                        "properties": {
+                            "path": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "solidworks_part",
+                                    "solidworks_assembly",
+                                    "step_export"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
         }
-      ]
     }
-  ]
 }
