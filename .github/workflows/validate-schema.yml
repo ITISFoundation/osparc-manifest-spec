@@ -1,0 +1,25 @@
+name: Validate Schema File
+
+on:
+  push:
+    paths:
+      - 'schema/cad_manifest.schema.json'
+  pull_request:
+    paths:
+      - 'schema/cad_manifest.schema.json'
+
+jobs:
+  validate-schema:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Validate JSON Schema
+        uses: sourcemeta/jsonschema@v9.3.5
+        with:
+          command: validate
+          args: >
+            --schema https://json-schema.org/draft/2020-12/schema
+            --instance schema/cad_manifest.schema.json
