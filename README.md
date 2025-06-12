@@ -7,14 +7,22 @@ The oSPARC CAD Manifest Specification defines a standard way to describe CAD com
 * 💾 **Consistency** — Prevents typos or missing fields with schema validation.
 * 🛠️ **Interoperability** — Makes CAD data machine-readable and reusable.
 
-
 ## 🔗 TL;DR
 
 * Write your manifest in **JSON**, include a `$schema` reference
-* Use **VS Code**, **GitHub Actions**, **pre‑commit**, or **online tools** to validate
+* Use **VS Code**, **GitHub Actions**, **pre‑commit**, or **online tools** to validate
 * All tools reuse the same JSON Schema — no duplicate logic needed 👍
 
-## 🧩Schema
+## 📋 What's in this Repository
+
+This repository contains:
+
+* 🧩 The **JSON Schema** definition file at [`schema/cad_manifest.schema.json`](schema/cad_manifest.schema.json)
+* 📝 **Examples** of valid manifest files at [`examples/`](examples/)
+* 🛠️ **Validation tools** and instructions for integration
+
+
+## 🧩 Schema
 
 A **JSON Schema** describing how to create a valid `cad_manifest.json`.
 It standardizes:
@@ -23,10 +31,43 @@ It standardizes:
 * ℹ️ Component **metadata** (name, type, description, files)
 * 🧰 File references (paths and types like STEP/SolidWorks)
 
+## 💡 Simple Example
+
+Here's a minimal example of a valid `cad_manifest.json`:
+
+```json
+{
+  "$schema": "https://itisfoundation.github.io/osparc-manifest-spec/schema/cad_manifest.schema.json",
+  "repository": "https://github.com/myorg/cad-project",
+  "components": [
+    {
+      "name": "SimpleAssembly",
+      "type": "assembly",
+      "description": "A basic assembly with one part",
+      "files": [
+        { "path": "assemblies/SimpleAssembly.SLDASM", "type": "solidworks_assembly" }
+      ],
+      "components": [
+        {
+          "name": "SimplePart",
+          "type": "part",
+          "description": "A basic part component",
+          "files": [
+            { "path": "parts/SimplePart.SLDPRT", "type": "solidworks_part" },
+            { "path": "exports/SimplePart.step", "type": "step_export" }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+For more complex examples, see the [`examples/`](examples/) directory.
 
 ## 🛠️ Different Ways to Validate your `cad_manifest.json`
 
-### 1. ✅ In VS Code
+### 1. ✅ In VS Code
 
 Ensure your manifest begins like this:
 
@@ -38,7 +79,7 @@ Ensure your manifest begins like this:
 }
 ```
 
-VS Code (with built‑in JSON support) will:
+VS Code (with built‑in JSON support) will:
 
 * Fetch the schema automatically
 * Show red squiggles for structural issues
