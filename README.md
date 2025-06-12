@@ -1,108 +1,107 @@
-# oSPARC CAD Manifest Specification
-
-This repository contains the schema specification for CAD manifests used in oSPARC projects.
-
-## Purpose
+# 📘 oSPARC CAD Manifest Specification
 
 The oSPARC CAD Manifest Specification defines a standard way to describe CAD components and their associated files in an external repository. This enables:
 
-- Consistent tracking of CAD files across projects
-- Automated validation of repository contents
-- Better integration with oSPARC platforms and services
+* 🌐 **Discoverability** — Enables services (e.g. o²S²PARC) to index CAD assets.
+* 📂 **Structure** — Defines a clear component hierarchy.
+* 💾 **Consistency** — Prevents typos or missing fields with schema validation.
+* 🛠️ **Interoperability** — Makes CAD data machine-readable and reusable.
 
-## Schema
 
-The JSON Schema definition is available at:
-[https://itisfoundation.github.io/osparc-manifest-spec/schema/cad_manifest.schema.json](https://itisfoundation.github.io/osparc-manifest-spec/schema/cad_manifest.schema.json)
+## 🔗 TL;DR
 
-## Usage
+* Write your manifest in **JSON**, include a `$schema` reference
+* Use **VS Code**, **GitHub Actions**, **pre‑commit**, or **online tools** to validate
+* All tools reuse the same JSON Schema — no duplicate logic needed 👍
 
-1. Add a `cad_manifest.json` file to your CAD repository root
-2. Include the GitHub Actions workflow for validation (see below)
-3. Structure your manifest according to the schema
+## 🧩Schema
 
-### Example Manifest
+A **JSON Schema** describing how to create a valid `cad_manifest.json`.
+It standardizes:
+
+* ⚙️ The **structure** (components, assemblies, parts)
+* ℹ️ Component **metadata** (name, type, description, files)
+* 🧰 File references (paths and types like STEP/SolidWorks)
+
+
+## 🛠️ Different Ways to Validate your `cad_manifest.json`
+
+### 1. ✅ In VS Code
+
+Ensure your manifest begins like this:
 
 ```json
 {
-  "manifest_version": "1.0",
-  "repository": "https://github.com/YourOrg/your-cad-repo",
-  "components": [
-    {
-      "name": "Component1",
-      "description": "Description of component",
-      "files": [
-        {
-          "path": "cad/Component1.SLDASM",
-          "type": "solidworks_assembly"
-        },
-        {
-          "path": "cad/Component1.step",
-          "type": "step_export"
-        }
-      ]
-    }
-  ]
+  "$schema": "https://itisfoundation.github.io/osparc-manifest-spec/schema/cad_manifest.schema.json",
+  "repository": "...",
+  "components": [ ... ]
 }
 ```
 
-## Validation
+VS Code (with built‑in JSON support) will:
 
-To validate your manifest, add the GitHub Actions workflow to your repository:
+* Fetch the schema automatically
+* Show red squiggles for structural issues
+* Offer autocompletion
 
-### GitHub Actions Validation
 
-Create a file `.github/workflows/validate-cad-manifest.yml` in your repository with the following content:
+### 2. ✅ Using GitHub Actions
+
+Add this workflow to [`.github/workflows/validate-manifest.yml`](.github/workflows/validate-manifest.yml) to your repo:
 
 ```yaml
-name: Validate CAD Manifest
+- name: Extract schema URL
+  id: get_schema
+  runs: |
+    echo "::set-output name=url::$(jq -r .\"$schema\" cad_manifest.json)"
 
-on:
-  push:
-    paths:
-      - 'cad_manifest.json'
-  pull_request:
-    paths:
-      - 'cad_manifest.json'
-  workflow_dispatch:
-
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'
-
-      - run: pip install jsonschema
-
-      - name: Download schema
-        run: |
-          curl -Lo schema.json https://itisfoundation.github.io/osparc-manifest-spec/schema/cad_manifest.schema.json
-
-      - name: Validate
-        run: |
-          python -c "import json, jsonschema; jsonschema.validate(json.load(open('cad_manifest.json')), json.load(open('schema.json'))); print('✅ Valid manifest')"
+- name: Validate manifest
+  uses: sourcemeta/jsonschema@v9
+  with:
+    command: validate
+    args: >
+      --schema ${{ steps.get_schema.outputs.url }}
+      --instance cad_manifest.json
 ```
 
-This workflow will automatically validate your manifest file against the latest schema whenever it changes or when manually triggered.
+This uses:
 
-### Development Container
+* 🐳 `jq` to read the `$schema` field
+* ⚖️ `sourcemeta/jsonschema` to validate without custom scripts
 
-This repository includes a devcontainer configuration for VS Code that provides a consistent development environment with all necessary dependencies pre-installed.
 
-To use it:
-1. Install the "Remote - Containers" extension in VS Code
-2. Open the repository in VS Code
-3. Click on the green button in the bottom-left corner and select "Reopen in Container"
+#### 3. ✅ As a Pre-commit Hook
 
-The container includes:
-- Python 3.12
-- UV for dependency management
-- Pre-commit and other development tools
+Add to your `.pre-commit-config.yaml`:
+
+```yaml
+repos:
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.33.0
+    hooks:
+      - id: check-jsonschema
+        name: Validate CAD Manifest
+        args: ["--schemafile", "cad_manifest.schema.json"]
+        files: ^cad_manifest\.json$
+```
+
+This runs validation on staged edits to `cad_manifest.json` before commits.
+
+
+#### 4. ✅ Online Validator
+
+Use tools like:
+
+* [**JSONSchema.dev**](https://jsonschema.dev/)
+* [**JSON Schema Validator**](https://www.jsonschemavalidator.net/)
+
+You can:
+
+* Paste your `cad_manifest.json`
+* Or load from URL
+* The schema is fetched from its `$schema` header automatically
+
+
 
 ## Contributing
 
