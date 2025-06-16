@@ -18,13 +18,13 @@ How to create a CAD manifest that follows this spec?
 * Use **VS Code**, **GitHub Actions**, **pre‑commit**, or **online tools** to validate
   * All tools reuse the same JSON Schema — no duplicate logic needed 👍
 
-
 ---
+
 ## 📋 What's in this Repository
 
 This repository contains:
 
-* 🧩 The **JSON Schema** definition file at [`schema/cad_manifest.schema.json`](schema/cad_manifest.schema.json)
+* 🧩 A **JSON Schema** for a CAD manifest [`schema/cad_manifest.schema.json`](schema/cad_manifest.schema.json)
 * 📝 **Examples** of valid manifest files at [`examples/`](examples/)
 * 🛠️ **Validation tools** and instructions for integration
 
@@ -34,8 +34,8 @@ This repository contains:
 A **JSON Schema** describing how to create a valid `cad_manifest.json`.
 It standardizes:
 
-* ⚙️ The **structure** (components, assemblies, parts)
-* ℹ️ Component **metadata** (name, type, description, files)
+* ⚙️ A **tree-like structure** of `components`, including assemblies and parts
+* ℹ️ Component **metadata** (id, type, description, files)
 * 🧰 File references (paths and types like STEP/SolidWorks)
 
 
@@ -49,7 +49,7 @@ Here's a minimal example of a valid `cad_manifest.json`:
   "repository": "https://github.com/myorg/cad-project",
   "components": [
     {
-      "name": "SimpleAssembly",
+      "id": "SimpleAssembly",
       "type": "assembly",
       "description": "A basic assembly with one part",
       "files": [
@@ -57,7 +57,7 @@ Here's a minimal example of a valid `cad_manifest.json`:
       ],
       "components": [
         {
-          "name": "SimplePart",
+          "id": "SimplePart",
           "type": "part",
           "description": "A basic part component",
           "files": [

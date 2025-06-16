@@ -1,9 +1,9 @@
 {
-    "$schema": "https://raw.githubusercontent.com/ITISFoundation/hornet-manifest-spec/refs/heads/main/schema/cad_manifest.schema.json",
+    "$schema": "../schema/cad_manifest.schema.json",
     "repository": "https://github.com/example-org/example-cad-repo",
     "components": [
       {
-        "name": "Electrode",
+        "id": "Electrode",
         "type": "assembly",
         "description": "Main electrode assembly including body and casing.",
         "files": [
@@ -12,7 +12,7 @@
         ],
         "components": [
           {
-            "name": "Electrode_Body",
+            "id": "Electrode_Body",
             "type": "part",
             "description": "The primary contact region of the electrode.",
             "files": [
@@ -21,7 +21,7 @@
             ]
           },
           {
-            "name": "Electrode_Casing",
+            "id": "Electrode_Casing",
             "type": "part",
             "description": "Protective casing for the electrode body.",
             "files": [
