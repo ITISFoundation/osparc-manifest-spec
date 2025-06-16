@@ -24,12 +24,16 @@ How to create a CAD manifest that follows this spec?
 
 This repository contains:
 
-* 🧩 A **JSON Schema** for a CAD manifest [`schema/cad_manifest.schema.json`](schema/cad_manifest.schema.json)
+* 🧩 **JSON Schemas** for manifests:
+  * [`schema/cad_manifest.schema.json`](schema/cad_manifest.schema.json) - For describing CAD components
+  * [`schema/sim_manifest.schema.json`](schema/sim_manifest.schema.json) - For mapping CAD components to simulation properties
 * 📝 **Examples** of valid manifest files at [`examples/`](examples/)
+* 📚 **Vocabularies** at [`vocab/`](vocab/) for standardized terms
 * 🛠️ **Validation tools** and instructions for integration
 
+### 🧩 JSON Schemas
 
-### 🧩 JSON Schema
+#### CAD Manifest Schema
 
 A **JSON Schema** describing how to create a valid `cad_manifest.json`.
 It standardizes:
@@ -38,6 +42,30 @@ It standardizes:
 * ℹ️ Component **metadata** (id, type, description, files)
 * 🧰 File references (paths and types like STEP/SolidWorks)
 
+
+#### Simulation Manifest Schema
+
+A **JSON Schema** describing how to create a valid `sim_manifest.json`. 
+It standardizes:
+
+* 🔗 **Mapping** CAD components to simulation properties
+* 🧪 **Material** assignments
+* 🛠️ **Boundary conditions** for simulation setup
+* 🏷️ **Semantic tags** for categorization
+
+The simulation manifest connects components defined in a CAD manifest to simulation-specific properties, enabling direct use in computational simulations.
+
+### 📚 Vocabulary Files
+
+This specification includes standardized vocabularies to ensure consistency:
+
+* [`vocab/semantic-tags.json`](vocab/semantic-tags.json) - Defines standardized tags for component roles (e.g., "electrical_interface", "biocompatible")
+* [`vocab/boundary-conditions.json`](vocab/boundary-conditions.json) - Defines standardized boundary conditions for simulations (e.g., "electrical_contact", "insulating")
+
+These vocabularies:
+* Ensure consistent terminology across projects
+* Allow validation of correct tag/condition usage
+* Can be extended as needs evolve
 
 ### 💡 Simple Example
 
@@ -73,8 +101,40 @@ Here's a minimal example of a valid `cad_manifest.json`:
 
 For more complex examples, see the [`examples/`](examples/) directory.
 
+#### Simulation Manifest Example
 
-### 🛠️ Different Ways to Validate your `cad_manifest.json`
+Here's a minimal example of a valid `sim_manifest.json`:
+
+```json
+{
+  "$schema": "https://itisfoundation.github.io/hornet-manifest-spec/schema/sim_manifest.schema.json",
+  "mappings": [
+    {
+      "component_ref": {
+        "cad_manifest_path": "./cad_manifest.json",
+        "component_id": "SimplePart"
+      },
+      "material": {
+        "name": "Titanium"
+      },
+      "boundary_conditions": ["insulating"],
+      "tags": ["biocompatible"]
+    }
+  ]
+}
+```
+
+For more complex examples, see the [`examples/`](examples/) directory.
+
+### 🔄 Keeping Schemas and Vocabularies in Sync
+
+The repository includes an automated sync mechanism:
+
+* The script [`scripts/sync_vocab_to_schema.py`](scripts/sync_vocab_to_schema.py) ensures vocabulary terms are reflected in schema validation rules
+* A pre-commit hook automatically runs this script to maintain synchronization
+* This prevents vocabulary/schema drift and ensures consistent validation
+
+### 🛠️ Different Ways to Validate your Manifests
 
 ![Schema validation](https://json-schema.org/img/json_schema.svg)
 
