@@ -22,7 +22,7 @@ jobs:
         with:
           cmd: "jq -r '.\"$schema\"' examples/cad_manifest.json"
 
-      - name: Validate with Sourcemeta JSON Schema
+      - name: Validate manifest against JSON Schema
         uses: sourcemeta/jsonschema@v9.2.1
         with:
           command: validate
