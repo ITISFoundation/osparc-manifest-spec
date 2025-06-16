@@ -1,0 +1,21 @@
+{
+  "$schema": "../schema/semantic-tags.schema.json",
+  "tags": [
+    {
+      "id": "electrical_interface",
+      "description": "Region forming electrical contact with surrounding medium or device."
+    },
+    {
+      "id": "implant_surface",
+      "description": "Surface of the component in contact with tissue or bio-environment."
+    },
+    {
+      "id": "dielectric_coating",
+      "description": "Insulating layer applied to restrict current flow."
+    },
+    {
+      "id": "biocompatible",
+      "description": "Material or region that is safe for use within biological systems."
+    }
+  ]
+}

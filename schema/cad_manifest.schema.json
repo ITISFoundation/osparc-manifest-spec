@@ -45,16 +45,17 @@
         "assembly": {
             "type": "object",
             "required": [
-                "name",
+                "id",
                 "type",
                 "description",
                 "files",
                 "components"
             ],
             "properties": {
-                "name": {
+                "id": {
                     "type": "string",
-                    "description": "Unique identifier for the component"
+                    "description": "Unique identifier for the component",
+                    "$comment": "Must be unique across the entire manifest, but JSON Schema cannot enforce this."
                 },
                 "type": {
                     "const": "assembly"

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./semantic-tags.schema.json",
+  "title": "Semantic Tags Schema",
+  "description": "Schema for defining semantic tags used in HORNET manifests",
+  "type": "object",
+  "required": ["tags"],
+  "properties": {
+    "tags": {
+      "type": "array",
+      "description": "List of semantic tags with their descriptions",
+      "items": {
+        "type": "object",
+        "required": ["id", "description"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the semantic tag"
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable explanation of the tag's meaning and usage"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

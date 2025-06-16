@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./boundary-conditions.schema.json",
+  "title": "Boundary Conditions Schema",
+  "description": "Schema for defining boundary conditions used in HORNET manifests",
+  "type": "object",
+  "required": ["conditions"],
+  "properties": {
+    "conditions": {
+      "type": "array",
+      "description": "List of boundary conditions with their descriptions",
+      "items": {
+        "type": "object",
+        "required": ["id", "description"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the boundary condition"
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable explanation of the boundary condition's meaning and application"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

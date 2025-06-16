@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/sim_manifest.schema.json",
+  "mappings": [
+    {
+      "component_ref": {
+        "cad_manifest_path": "./cad_manifest.json",
+        "component_id": "Electrode_Body"
+      },
+      "material": {
+        "name": "Platinum",
+        "uri": "https://materialsdb.org/materials/pt"
+      },
+      "boundary_conditions": ["electrical_contact"],
+      "tags": ["electrical_interface", "implant_surface"]
+    },
+    {
+      "component_ref": {
+        "cad_manifest_uri": "https://itisfoundation.github.io/hornet-manifest-spec/examples/cad_manifest.json",
+        "component_id": "Electrode_Casing"
+      },
+      "material": {
+        "name": "Parylene-C"
+      },
+      "boundary_conditions": ["insulating"],
+      "tags": ["dielectric_coating", "biocompatible"]
+    }
+  ]
+}
