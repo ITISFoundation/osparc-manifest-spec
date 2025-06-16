@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://itisfoundation.github.io/osparc-manifest-spec/schema/cad_manifest.schema.json",
-    "title": "osparc CAD Manifest",
+    "$id": "https://itisfoundation.github.io/hornet-manifest-spec/schema/cad_manifest.schema.json",
+    "title": "HORNET CAD Manifest",
     "schema_version": "0.1.0",
     "description": "Schema for describing structured collections of CAD components and their file representations in external repositories.",
     "type": "object",

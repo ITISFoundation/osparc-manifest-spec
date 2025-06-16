@@ -2,10 +2,13 @@
 
 ## 🔗 TL;DR
 
-* Write a manifest in **JSON** (`cad_manifest.json`) that identifies the different parts and assemblies of your CAD
-  * include a `$schema`
+How to create a CAD manifest that follows this spec?
+
+* Write a manifest in **JSON** that identifies the different parts and assemblies of your CAD (see `examples/cad_manifest.json`)
+  * include a `$schema` to a published version of this repository's `cad_manifest.schema.json`
 * Use **VS Code**, **GitHub Actions**, **pre‑commit**, or **online tools** to validate
   * All tools reuse the same JSON Schema — no duplicate logic needed 👍
+
 
 ---
 
@@ -41,7 +44,7 @@ Here's a minimal example of a valid `cad_manifest.json`:
 
 ```json
 {
-  "$schema": "https://itisfoundation.github.io/osparc-manifest-spec/schema/cad_manifest.schema.json",
+  "$schema": "https://itisfoundation.github.io/hornet-manifest-spec/schema/cad_manifest.schema.json",
   "repository": "https://github.com/myorg/cad-project",
   "components": [
     {
@@ -80,7 +83,7 @@ Ensure your manifest begins like this:
 
 ```json
 {
-  "$schema": "https://itisfoundation.github.io/osparc-manifest-spec/schema/cad_manifest.schema.json",
+  "$schema": "https://itisfoundation.github.io/hornet-manifest-spec/schema/cad_manifest.schema.json",
   "repository": "...",
   "components": [ ... ]
 }
