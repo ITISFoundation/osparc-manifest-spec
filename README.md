@@ -1,6 +1,15 @@
 # HORNET CAD Manifest Specification
 
-## 🔗 TL;DR
+
+The Hornet CAD Manifest Specification defines a standard way to describe CAD components and their associated files in an external repository. This enables:
+
+* 🌐 **Discoverability** — Enables services (e.g. o²S²PARC) to index CAD assets and integrate them in existing workflows e.g. in simulations.
+* 📂 **Structure** — Defines a clear component hierarchy.
+* 💾 **Consistency** — Prevents typos or missing fields with schema validation.
+* 🛠️ **Interoperability** — Makes CAD data machine-readable and reusable.
+
+
+### 🔗 TL;DR
 
 How to create a CAD manifest that follows this spec?
 
@@ -11,14 +20,6 @@ How to create a CAD manifest that follows this spec?
 
 
 ---
-
-The Hornet CAD Manifest Specification defines a standard way to describe CAD components and their associated files in an external repository. This enables:
-
-* 🌐 **Discoverability** — Enables services (e.g. o²S²PARC) to index CAD assets and integrate them in existing workflows e.g. in simulations.
-* 📂 **Structure** — Defines a clear component hierarchy.
-* 💾 **Consistency** — Prevents typos or missing fields with schema validation.
-* 🛠️ **Interoperability** — Makes CAD data machine-readable and reusable.
-
 ## 📋 What's in this Repository
 
 This repository contains:
