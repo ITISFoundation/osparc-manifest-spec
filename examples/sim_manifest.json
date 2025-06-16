@@ -1,10 +1,9 @@
 {
   "$schema": "../schema/sim_manifest.schema.json",
-  "cad_manifest_uri": "./cad_manifest.json",
   "mappings": [
     {
       "component_ref": {
-        "cad_manifest_uri": "./cad_manifest.json",
+        "cad_manifest_path": "./cad_manifest.json",
         "component_id": "Electrode_Body"
       },
       "material": {
@@ -16,7 +15,7 @@
     },
     {
       "component_ref": {
-        "cad_manifest_uri": "./cad_manifest.json",
+        "cad_manifest_uri": "https://itisfoundation.github.io/hornet-manifest-spec/examples/cad_manifest.json",
         "component_id": "Electrode_Casing"
       },
       "material": {
