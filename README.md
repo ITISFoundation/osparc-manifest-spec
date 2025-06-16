@@ -22,7 +22,7 @@ This repository contains:
 * 🛠️ **Validation tools** and instructions for integration
 
 
-## 🧩 Schema
+### 🧩 JSON Schema
 
 
 A **JSON Schema** describing how to create a valid `cad_manifest.json`.
@@ -33,7 +33,7 @@ It standardizes:
 * 🧰 File references (paths and types like STEP/SolidWorks)
 
 
-## 💡 Simple Example
+### 💡 Simple Example
 
 Here's a minimal example of a valid `cad_manifest.json`:
 
@@ -68,11 +68,11 @@ Here's a minimal example of a valid `cad_manifest.json`:
 For more complex examples, see the [`examples/`](examples/) directory.
 
 
-## 🛠️ Different Ways to Validate your `cad_manifest.json`
+### 🛠️ Different Ways to Validate your `cad_manifest.json`
 
 ![Schema validation](https://json-schema.org/img/json_schema.svg)
 
-### 1. ✅ In VS Code
+#### 1. ✅ In VS Code
 
 Ensure your manifest begins like this:
 
@@ -91,7 +91,7 @@ VS Code (with built‑in JSON support) will:
 * Offer autocompletion
 
 
-### 2. ✅ Using GitHub Actions
+#### 2. ✅ Using GitHub Actions
 
 Add this workflow to [`.github/workflows/validate-manifest.yml`](.github/workflows/validate-manifest.yml) to your repo:
 
@@ -146,6 +146,22 @@ You can:
 * Paste your `cad_manifest.json`
 * Or load from URL
 * The schema is fetched from its `$schema` header automatically
+
+
+### 🎨 Generate UIs from the JSON Schema
+
+You can automatically create user interfaces for editing `cad_manifest.json` files using these tools:
+
+#### Online Schema-to-Form Editors
+
+* **[JSON Schema Form Playground](https://rjsf-team.github.io/react-jsonschema-form/)** — Test RJSF instantly
+* **[JSON Forms Playground](https://jsonforms.io/examples/)** — Interactive examples
+* **[Schema Form Generator](https://networknt.github.io/json-schema-form/)** — Simple online tool
+
+#### Standalone Applications
+
+* **[JSON Editor](https://github.com/josdejong/jsoneditor)** — Desktop/web JSON editor with schema support
+* **[Visual JSON Schema Editor](https://json-schema-editor.tangramjs.com/)** — Schema creation tool
 
 
 
