@@ -2,20 +2,35 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "./sim_manifest.schema.json",
   "type": "object",
-  "required": ["mappings"],
+  "required": [
+    "mappings"
+  ],
   "properties": {
     "mappings": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["component_ref", "tags"],
+        "required": [
+          "component_ref",
+          "tags"
+        ],
         "properties": {
           "component_ref": {
             "type": "object",
-            "required": ["component_id"],
+            "required": [
+              "component_id"
+            ],
             "oneOf": [
-              { "required": ["cad_manifest_path"] },
-              { "required": ["cad_manifest_uri"] }
+              {
+                "required": [
+                  "cad_manifest_path"
+                ]
+              },
+              {
+                "required": [
+                  "cad_manifest_uri"
+                ]
+              }
             ],
             "properties": {
               "cad_manifest_path": {
@@ -27,26 +42,35 @@
                 "format": "uri",
                 "description": "URI reference to the CAD manifest (use for remotely hosted manifests)"
               },
-              "component_id": { "type": "string" }
+              "component_id": {
+                "type": "string"
+              }
             }
           },
           "material": {
             "type": "object",
-            "required": ["name"],
+            "required": [
+              "name"
+            ],
             "properties": {
-              "name": { "type": "string"},
-              "uri": { "type": "string", "format": "uri" , "description": "Use to disambiguate material name"}
+              "name": {
+                "type": "string"
+              },
+              "uri": {
+                "type": "string",
+                "format": "uri",
+                "description": "Use to disambiguate material name"
+              }
             }
           },
           "boundary_conditions": {
             "type": "array",
             "items": {
               "type": "string",
-              "$comment": "Needs to be in sync with vocab/boundary-conditions.json. Should be an enum of valid boundary condition IDs.",
+              "$comment": "Needs to be in sync with vocab/boundary-conditions.json. SEE scripts/sync_vocab_to_schema.py",
               "enum": [
                 "electrical_contact",
                 "insulating"
-             
               ]
             }
           },
@@ -54,10 +78,10 @@
             "type": "array",
             "items": {
               "type": "string",
-              "$comment": "Needs to be in sync with vocab/semantic-tags.json",
+              "$comment": "Needs to be in sync with vocab/semantic-tags.json. SEE scripts/sync_vocab_to_schema.py",
               "enum": [
-                "electrical_interface",
                 "implant_surface",
+                "electrical_interface",
                 "dielectric_coating",
                 "biocompatible"
               ]
