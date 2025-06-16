@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./em_sim_manifest.schema.json",
+  "type": "object",
+  "required": ["cad_manifest_uri", "mappings"],
+  "properties": {
+    "mappings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["component_ref", "tags"],
+        "properties": {
+          "component_ref": {
+            "type": "object",
+            "required": ["cad_manifest_uri", "component_id"],
+            "properties": {
+              "cad_manifest_uri": { "type": "string", "format": "uri" },
+              "component_id": { "type": "string" }
+            }
+          },
+          "material": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": { "type": "string" },
+              "uri": { "type": "string", "format": "uri" }
+            }
+          },
+          "boundary_conditions": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "electrical_interface",
+                "implant_surface",
+                "dielectric_coating",
+                "biocompatible"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
