@@ -24,12 +24,14 @@ This repository contains:
 
 ## 🧩 Schema
 
+
 A **JSON Schema** describing how to create a valid `cad_manifest.json`.
 It standardizes:
 
 * ⚙️ The **structure** (components, assemblies, parts)
 * ℹ️ Component **metadata** (name, type, description, files)
 * 🧰 File references (paths and types like STEP/SolidWorks)
+
 
 ## 💡 Simple Example
 
@@ -65,7 +67,10 @@ Here's a minimal example of a valid `cad_manifest.json`:
 
 For more complex examples, see the [`examples/`](examples/) directory.
 
+
 ## 🛠️ Different Ways to Validate your `cad_manifest.json`
+
+![Schema validation](https://json-schema.org/img/json_schema.svg)
 
 ### 1. ✅ In VS Code
 
