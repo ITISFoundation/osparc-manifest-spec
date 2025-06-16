@@ -1,17 +1,20 @@
-# 📘 oSPARC CAD Manifest Specification
-
-The oSPARC CAD Manifest Specification defines a standard way to describe CAD components and their associated files in an external repository. This enables:
-
-* 🌐 **Discoverability** — Enables services (e.g. o²S²PARC) to index CAD assets.
-* 📂 **Structure** — Defines a clear component hierarchy.
-* 💾 **Consistency** — Prevents typos or missing fields with schema validation.
-* 🛠️ **Interoperability** — Makes CAD data machine-readable and reusable.
+# HORNET CAD Manifest Specification
 
 ## 🔗 TL;DR
 
-* Write your manifest in **JSON**, include a `$schema` reference
+* Write a manifest in **JSON** (`cad_manifest.json`) that identifies the different parts and assemblies of your CAD
+  * include a `$schema`
 * Use **VS Code**, **GitHub Actions**, **pre‑commit**, or **online tools** to validate
-* All tools reuse the same JSON Schema — no duplicate logic needed 👍
+  * All tools reuse the same JSON Schema — no duplicate logic needed 👍
+
+---
+
+The Hornet CAD Manifest Specification defines a standard way to describe CAD components and their associated files in an external repository. This enables:
+
+* 🌐 **Discoverability** — Enables services (e.g. o²S²PARC) to index CAD assets and integrate them in existing workflows e.g. in simulations.
+* 📂 **Structure** — Defines a clear component hierarchy.
+* 💾 **Consistency** — Prevents typos or missing fields with schema validation.
+* 🛠️ **Interoperability** — Makes CAD data machine-readable and reusable.
 
 ## 📋 What's in this Repository
 
@@ -23,7 +26,6 @@ This repository contains:
 
 
 ### 🧩 JSON Schema
-
 
 A **JSON Schema** describing how to create a valid `cad_manifest.json`.
 It standardizes:
@@ -152,16 +154,7 @@ You can:
 
 You can automatically create user interfaces for editing `cad_manifest.json` files using these tools:
 
-#### Online Schema-to-Form Editors
-
 * **[JSON Schema Form Playground](https://rjsf-team.github.io/react-jsonschema-form/)** — Test RJSF instantly
-* **[JSON Forms Playground](https://jsonforms.io/examples/)** — Interactive examples
-* **[Schema Form Generator](https://networknt.github.io/json-schema-form/)** — Simple online tool
-
-#### Standalone Applications
-
-* **[JSON Editor](https://github.com/josdejong/jsoneditor)** — Desktop/web JSON editor with schema support
-* **[Visual JSON Schema Editor](https://json-schema-editor.tangramjs.com/)** — Schema creation tool
 
 
 
