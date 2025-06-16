@@ -19,7 +19,7 @@ jobs:
         id: get_schema
         uses: sergeysova/jq-action@v2
         with:
-          cmd: 'jq -r ."$schema" schema/cad_manifest.schema.json'        
+          cmd: "jq -r .\"$schema\" schema/cad_manifest.schema.json"
 
       - name: Validate JSON Schema
         uses: sourcemeta/jsonschema@v9.3.5
@@ -35,12 +35,12 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-        
+
       - name: Extract schema URL using jq
         id: get_schema
         uses: sergeysova/jq-action@v2
         with:
-          cmd: 'jq -r .["$id"] schema/cad_manifest.schema.json'
+          cmd: "jq -r '.\"$id\"' schema/cad_manifest.schema.json"
 
       - name: Validate Examples against Schema
         uses: sourcemeta/jsonschema@v9.3.5
