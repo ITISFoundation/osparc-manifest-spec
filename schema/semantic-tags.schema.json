@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "./semantic-tags.schema.json",
+  "$id": "https://raw.githubusercontent.com/ITISFoundation/hornet-manifest-spec/refs/heads/main/semantic-tags.schema.json",
   "title": "Semantic Tags Schema",
   "description": "Schema for defining semantic tags used in HORNET manifests",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "./boundary-conditions.schema.json",
+  "$id": "https://raw.githubusercontent.com/ITISFoundation/hornet-manifest-spec/refs/heads/main/schema/boundary-conditions.schema.json",
   "title": "Boundary Conditions Schema",
   "description": "Schema for defining boundary conditions used in HORNET manifests",
   "type": "object",

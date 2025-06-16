@@ -1,5 +1,5 @@
 {
-  "$schema": "../schema/sim_manifest.schema.json",
+  "$schema": "https://raw.githubusercontent.com/ITISFoundation/hornet-manifest-spec/refs/heads/main/schema/sim_manifest.schema.json",
   "mappings": [
     {
       "component_ref": {
@@ -15,7 +15,7 @@
     },
     {
       "component_ref": {
-        "cad_manifest_uri": "https://itisfoundation.github.io/hornet-manifest-spec/examples/cad_manifest.json",
+        "cad_manifest_uri": "https://raw.githubusercontent.com/ITISFoundation/hornet-manifest-spec/examples/cad_manifest.json",
         "component_id": "Electrode_Casing"
       },
       "material": {

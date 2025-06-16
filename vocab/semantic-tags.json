@@ -1,5 +1,5 @@
 {
-  "$schema": "../schema/semantic-tags.schema.json",
+  "$schema": "https://raw.githubusercontent.com/ITISFoundation/hornet-manifest-spec/refs/heads/main/schema/semantic-tags.schema.json",
   "tags": [
     {
       "id": "electrical_interface",

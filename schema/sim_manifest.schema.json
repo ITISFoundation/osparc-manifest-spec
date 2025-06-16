@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "./sim_manifest.schema.json",
+  "$id": "https://raw.githubusercontent.com/ITISFoundation/hornet-manifest-spec/refs/heads/main/sim_manifest.schema.json",
   "type": "object",
   "required": [
     "mappings"
