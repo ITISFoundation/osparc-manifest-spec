@@ -3,28 +3,29 @@ name: Validate CAD Manifest
 on:
   push:
     paths:
-      - 'cad_manifest.yaml'
+        - 'examples/cad_manifest.json'
   pull_request:
     paths:
-      - 'cad_manifest.yaml'
+        - 'examples/cad_manifest.json'
 
 jobs:
   validate:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Extract schema URL using jq
+        id: get_schema
+        uses: sergeysova/jq-action@v2
         with:
-          python-version: '3.12'
+          cmd: "jq -r '.\"$schema\"' examples/cad_manifest.json"
 
-      - name: Install dependencies
-        run: pip install pyyaml jsonschema
-
-      - name: Make validation script executable
-        run: chmod +x ./validate.sh
-
-      - name: Validate manifest
-        run: ./validate.sh cad_manifest.yaml schema/cad_manifest.schema.json
+      - name: Validate manifest against JSON Schema
+        uses: sourcemeta/jsonschema@v9.2.1
+        with:
+          command: validate
+          args: >
+            --schema ${{ steps.get_schema.outputs.value }}
+            --instance examples/cad_manifest.json
