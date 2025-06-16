@@ -1,22 +1,27 @@
-# HORNET CAD Manifest Specification
+# HORNET Manifests Specification
 
+The Hornet Manifest Specification provides standardized formats for describing CAD components and preparing them for computational simulations. Through interconnected JSON schemas, it enables:
 
-The Hornet CAD Manifest Specification defines a standard way to describe CAD components and their associated files in an external repository. This enables:
-
-* 🌐 **Discoverability** — Enables services (e.g. o²S²PARC) to index CAD assets and integrate them in existing workflows e.g. in simulations.
-* 📂 **Structure** — Defines a clear component hierarchy.
-* 💾 **Consistency** — Prevents typos or missing fields with schema validation.
-* 🛠️ **Interoperability** — Makes CAD data machine-readable and reusable.
-
+* 🌐 **Discoverability** — Enables services to index CAD assets and integrate them into simulation workflows
+* 🔄 **Interoperability** — Components can be referenced across tools and platforms
+* 📂 **Structure** — Hierarchical organization of components for simulation setups
+* 💾 **Consistency** — Schema validation ensures data integrity and prevents errors
+* 🧪 **Simulation-Ready** — Comprehensive preparation of CAD components for numerical analysis
 
 ### 🔗 TL;DR
 
-How to create a CAD manifest that follows this spec?
+**Creating CAD and Simulation Manifests:**
 
-* Write a manifest in **JSON** that identifies the different parts and assemblies of your CAD (see `examples/cad_manifest.json`)
-  * include a `$schema` to a published version of this repository's `cad_manifest.schema.json`
-* Use **VS Code**, **GitHub Actions**, **pre‑commit**, or **online tools** to validate
-  * All tools reuse the same JSON Schema — no duplicate logic needed 👍
+1. **CAD Manifest** (`cad_manifest.json`) - Describes your CAD components, assemblies, and files
+   * Include `"$schema": "https://itisfoundation.github.io/hornet-manifest-spec/schema/cad_manifest.schema.json"`
+   * Define components with IDs, types, descriptions, and file references
+
+2. **Simulation Manifest** (`sim_manifest.json`) - Prepares CAD components for simulation use
+   * Include `"$schema": "https://itisfoundation.github.io/hornet-manifest-spec/schema/sim_manifest.schema.json"`
+   * Reference components from your CAD manifest and define their simulation context (materials, boundary conditions, etc.)
+
+3. **Validate** using VS Code, GitHub Actions, pre-commit hooks, or online tools
+   * All validation uses the same JSON Schemas for consistent results
 
 ---
 
@@ -45,15 +50,15 @@ It standardizes:
 
 #### Simulation Manifest Schema
 
-A **JSON Schema** describing how to create a valid `sim_manifest.json`. 
+A **JSON Schema** describing how to create a valid `sim_manifest.json`.
 It standardizes:
 
-* 🔗 **Mapping** CAD components to simulation properties
-* 🧪 **Material** assignments
-* 🛠️ **Boundary conditions** for simulation setup
-* 🏷️ **Semantic tags** for categorization
+* 🔗 **Component references** to CAD definitions for simulation use
+* 🧪 **Material assignments** for physical property calculations
+* 🛠️ **Boundary conditions** for defining simulation domains and constraints
+* 🏷️ **Semantic tags** for simulation-specific categorization and processing
 
-The simulation manifest connects components defined in a CAD manifest to simulation-specific properties, enabling direct use in computational simulations.
+The simulation manifest transforms CAD components into simulation-ready definitions, enabling direct incorporation into computational models without manual translation steps.
 
 ### 📚 Vocabulary Files
 
@@ -124,7 +129,7 @@ Here's a minimal example of a valid `sim_manifest.json`:
 }
 ```
 
-For more complex examples, see the [`examples/`](examples/) directory.
+This example maps a CAD component to its simulation-specific context, defining material properties and boundary conditions needed for computational analysis.
 
 ### 🔄 Keeping Schemas and Vocabularies in Sync
 
