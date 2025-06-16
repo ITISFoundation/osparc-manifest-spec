@@ -1,0 +1,13 @@
+{
+  "$schema": "../schema/boundary-conditions.schema.json",
+  "conditions": [
+    {
+      "id": "electrical_contact",
+      "description": "Surface where an electric field is imposed."
+    },
+    {
+      "id": "insulating",
+      "description": "Surface with no current flow."
+    }
+  ]
+}
