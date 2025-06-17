@@ -237,6 +237,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Copyright
 
-Copyright (c) 2023 IT'IS Foundation
+Copyright (c) 2025 IT'IS Foundation
 
 [HORNET]:https://www.ninds.nih.gov/current-research/research-funded-ninds/translational-research/translational-devices/human-open-research-neural-engineering-technologies-hornet-initiative
