@@ -28,6 +28,7 @@ style: |
 <!-- _class: title -->
 
 # HORNET Manifests Specification
+
 ## Standardized CAD Component Description for Simulations
 
 **IT'IS Foundation**
@@ -41,6 +42,7 @@ style: |
 🌐 **Standardized JSON schemas** for describing CAD components and preparing them for computational simulations
 
 ### Key Benefits:
+
 - 🔍 **Discoverability** — Index CAD assets for simulation workflows
 - 🔄 **Interoperability** — Reference components across tools and platforms
 - 📂 **Structure** — Hierarchical organization for simulation setups
@@ -52,11 +54,13 @@ style: |
 ## Two Main Manifest Types
 
 ### 📐 CAD Manifest (`cad_manifest.json`)
+
 - Describes CAD components, assemblies, and files
 - Tree-like structure with metadata (IDs, types, descriptions)
 - File references (STEP, SolidWorks, etc.)
 
 ### ⚡ Simulation Manifest (`sim_manifest.json`)
+
 - Maps CAD components to simulation properties
 - Material assignments for physical calculations
 - Boundary conditions and semantic tags
