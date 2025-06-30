@@ -13,15 +13,30 @@ style: |
   section.title {
     background-position: bottom 20px right 20px;
     background-size: 100px 100px;
-  }
-
-  section pre {
+  }  section pre {
     font-size: 0.55em;
     line-height: 1.1;
   }
-
+  
   section code {
     font-size: 0.55em;
+  }
+  
+  section.schema-vocab {
+    font-size: 0.85em;
+  }
+  
+  section.schema-vocab h3 {
+    font-size: 1.1em;
+    margin-bottom: 0.3em;
+  }
+  
+  section.schema-vocab ul {
+    margin: 0.2em 0;
+  }
+  
+  section.schema-vocab li {
+    margin: 0.1em 0;
   }
 ---
 
@@ -70,6 +85,8 @@ style: |
 
 ---
 
+<!-- _class: schema-vocab -->
+
 ## Schema Validation & Vocabularies
 
 ### 📋 JSON Schema Validation
@@ -80,9 +97,9 @@ style: |
 
 ### 📚 Standardized Vocabularies
 
-- **Semantic tags** (`vocab/semantic-tags.json`) - Component roles and properties
+- **Semantic tags** ([`vocab/semantic-tags.json`](https://github.com/ITISFoundation/hornet-manifest-spec/blob/main/vocab/semantic-tags.json)) - Component roles and properties
   - Examples: `"electrical_interface"`, `"biocompatible"`, `"load_bearing"`
-- **Boundary conditions** (`vocab/boundary-conditions.json`) - Simulation constraints
+- **Boundary conditions** ([`vocab/boundary-conditions.json`](https://github.com/ITISFoundation/hornet-manifest-spec/blob/main/vocab/boundary-conditions.json)) - Simulation constraints
   - Examples: `"electrical_contact"`, `"insulating"`, `"fixed_support"`
 
 ### 🔄 Sync Mechanism
@@ -112,6 +129,8 @@ Describes CAD components, assemblies, and files with metadata:
 }
 ```
 
+**💡 More examples:** https://github.com/ITISFoundation/hornet-manifest-spec/tree/main/examples
+
 ---
 
 ## Simulation Manifest Example
@@ -132,3 +151,5 @@ Maps CAD components to simulation properties:
   }]
 }
 ```
+
+**💡 More examples:** https://github.com/ITISFoundation/hornet-manifest-spec/tree/main/examples
