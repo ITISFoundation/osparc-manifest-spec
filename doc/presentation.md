@@ -17,26 +17,17 @@ style: |
     font-size: 0.55em;
     line-height: 1.1;
   }
-  
+
   section code {
     font-size: 0.55em;
   }
-  
-  section.schema-vocab {
-    font-size: 0.85em;
-  }
-  
-  section.schema-vocab h3 {
-    font-size: 1.1em;
-    margin-bottom: 0.3em;
-  }
-  
+
   section.schema-vocab ul {
-    margin: 0.2em 0;
+    font-size: 0.8em;
   }
-  
+
   section.schema-vocab li {
-    margin: 0.1em 0;
+    font-size: 0.8em;
   }
 ---
 
@@ -91,9 +82,9 @@ style: |
 
 ### 📋 JSON Schema Validation
 
-- **Automatic validation** using `$schema` field in manifest files
-- **Real-time feedback** in VS Code and other editors
-- **CI/CD integration** for automated quality checks
+- Automatic validation using `$schema` field
+- Real-time feedback in VS Code and editors
+- CI/CD integration for quality checks
 
 ### 📚 Standardized Vocabularies
 
@@ -105,7 +96,7 @@ style: |
 ### 🔄 Sync Mechanism
 
 - Automated script keeps schemas and vocabularies synchronized
-- Prevents vocabulary/schema drift and ensures consistent validation
+- Prevents vocabulary/schema drift
 
 ---
 
