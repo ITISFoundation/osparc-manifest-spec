@@ -48,7 +48,7 @@ section pre {
 section code {
   font-size: 0.55em;
 }
-;" data-marpit-pagination-total="5">
+;" data-marpit-pagination-total="6">
 <h1 id="hornet-manifests-specification">HORNET Manifests Specification</h1>
 <h2 id="standardized-cad-component-description-for-simulations">Standardized CAD Component Description for Simulations</h2>
 <p><strong>IT'IS Foundation</strong></p>
@@ -94,7 +94,7 @@ section pre {
 section code {
   font-size: 0.55em;
 }
-;" data-marpit-pagination-total="5">
+;" data-marpit-pagination-total="6">
 <h2 id="what-is-hornet-manifests">What is HORNET Manifests?</h2>
 <p><img class="emoji" draggable="false" alt="🌐" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f310.svg" data-marp-twemoji=""/> <strong>Standardized JSON schemas</strong> for describing CAD components and preparing them for computational simulations</p>
 <h3 id="key-benefits">Key Benefits:</h3>
@@ -146,7 +146,7 @@ section pre {
 section code {
   font-size: 0.55em;
 }
-;" data-marpit-pagination-total="5">
+;" data-marpit-pagination-total="6">
 <h2 id="two-main-manifest-types">Two Main Manifest Types</h2>
 <h3 id="%F0%9F%93%90-cad-manifest-cad_manifestjson"><img class="emoji" draggable="false" alt="📐" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4d0.svg" data-marp-twemoji=""/> CAD Manifest (<code>cad_manifest.json</code>)</h3>
 <ul>
@@ -203,23 +203,32 @@ section pre {
 section code {
   font-size: 0.55em;
 }
-;" data-marpit-pagination-total="5">
-<h2 id="cad-manifest-example">CAD Manifest Example</h2>
-<p>Describes CAD components, assemblies, and files with metadata:</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">&quot;$schema&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://itisfoundation.github.io/hornet-manifest-spec/schema/cad_manifest.schema.json&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;repository&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://github.com/myorg/cad-project&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;components&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">{</span>
-    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;SimplePart&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;part&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;A basic part component&quot;</span><span class="hljs-punctuation">,</span>
-    <span class="hljs-attr">&quot;files&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-      <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;parts/SimplePart.SLDPRT&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;solidworks_part&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;exports/SimplePart.step&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;step_export&quot;</span> <span class="hljs-punctuation">}</span>
-    <span class="hljs-punctuation">]</span>
-  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">]</span>
-<span class="hljs-punctuation">}</span>
-</code></pre>
+;" data-marpit-pagination-total="6">
+<h2 id="schema-validation--vocabularies">Schema Validation &amp; Vocabularies</h2>
+<h3 id="%F0%9F%93%8B-json-schema-validation"><img class="emoji" draggable="false" alt="📋" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4cb.svg" data-marp-twemoji=""/> JSON Schema Validation</h3>
+<ul>
+<li><strong>Automatic validation</strong> using <code>$schema</code> field in manifest files</li>
+<li><strong>Real-time feedback</strong> in VS Code and other editors</li>
+<li><strong>CI/CD integration</strong> for automated quality checks</li>
+</ul>
+<h3 id="%F0%9F%93%9A-standardized-vocabularies"><img class="emoji" draggable="false" alt="📚" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4da.svg" data-marp-twemoji=""/> Standardized Vocabularies</h3>
+<ul>
+<li><strong>Semantic tags</strong> (<code>vocab/semantic-tags.json</code>) - Component roles and properties
+<ul>
+<li>Examples: <code>&quot;electrical_interface&quot;</code>, <code>&quot;biocompatible&quot;</code>, <code>&quot;load_bearing&quot;</code></li>
+</ul>
+</li>
+<li><strong>Boundary conditions</strong> (<code>vocab/boundary-conditions.json</code>) - Simulation constraints
+<ul>
+<li>Examples: <code>&quot;electrical_contact&quot;</code>, <code>&quot;insulating&quot;</code>, <code>&quot;fixed_support&quot;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="%F0%9F%94%84-sync-mechanism"><img class="emoji" draggable="false" alt="🔄" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f504.svg" data-marp-twemoji=""/> Sync Mechanism</h3>
+<ul>
+<li>Automated script keeps schemas and vocabularies synchronized</li>
+<li>Prevents vocabulary/schema drift and ensures consistent validation</li>
+</ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="5" data-paginate="true" data-theme="default" data-style="section {
   background-image: url('https://avatars.githubusercontent.com/u/32800832?s=280&amp;v=4');
@@ -261,7 +270,65 @@ section pre {
 section code {
   font-size: 0.55em;
 }
-;" data-marpit-pagination-total="5">
+;" data-marpit-pagination-total="6">
+<h2 id="cad-manifest-example">CAD Manifest Example</h2>
+<p>Describes CAD components, assemblies, and files with metadata:</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;$schema&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://itisfoundation.github.io/hornet-manifest-spec/schema/cad_manifest.schema.json&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;repository&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://github.com/myorg/cad-project&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;components&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;SimplePart&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;part&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;A basic part component&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;files&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;parts/SimplePart.SLDPRT&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;solidworks_part&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;exports/SimplePart.step&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;step_export&quot;</span> <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-paginate="true" data-theme="default" data-style="section {
+  background-image: url('https://avatars.githubusercontent.com/u/32800832?s=280&amp;v=4');
+  background-repeat: no-repeat;
+  background-position: bottom 20px right 20px;
+  background-size: 80px 80px;
+}
+
+section.title {
+  background-position: bottom 20px right 20px;
+  background-size: 100px 100px;
+}
+
+section pre {
+  font-size: 0.55em;
+  line-height: 1.1;
+}
+
+section code {
+  font-size: 0.55em;
+}
+" lang="en-US" data-marpit-pagination="6" style="--paginate:true;--theme:default;--style:section {
+  background-image: url('https://avatars.githubusercontent.com/u/32800832?s=280&amp;v=4');
+  background-repeat: no-repeat;
+  background-position: bottom 20px right 20px;
+  background-size: 80px 80px;
+}
+
+section.title {
+  background-position: bottom 20px right 20px;
+  background-size: 100px 100px;
+}
+
+section pre {
+  font-size: 0.55em;
+  line-height: 1.1;
+}
+
+section code {
+  font-size: 0.55em;
+}
+;" data-marpit-pagination-total="6">
 <h2 id="simulation-manifest-example">Simulation Manifest Example</h2>
 <p>Maps CAD components to simulation properties:</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-json"><span class="hljs-punctuation">{</span>

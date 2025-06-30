@@ -70,6 +70,28 @@ style: |
 
 ---
 
+## Schema Validation & Vocabularies
+
+### 📋 JSON Schema Validation
+
+- **Automatic validation** using `$schema` field in manifest files
+- **Real-time feedback** in VS Code and other editors
+- **CI/CD integration** for automated quality checks
+
+### 📚 Standardized Vocabularies
+
+- **Semantic tags** (`vocab/semantic-tags.json`) - Component roles and properties
+  - Examples: `"electrical_interface"`, `"biocompatible"`, `"load_bearing"`
+- **Boundary conditions** (`vocab/boundary-conditions.json`) - Simulation constraints
+  - Examples: `"electrical_contact"`, `"insulating"`, `"fixed_support"`
+
+### 🔄 Sync Mechanism
+
+- Automated script keeps schemas and vocabularies synchronized
+- Prevents vocabulary/schema drift and ensures consistent validation
+
+---
+
 ## CAD Manifest Example
 
 Describes CAD components, assemblies, and files with metadata:
