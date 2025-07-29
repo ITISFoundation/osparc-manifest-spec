@@ -8,22 +8,30 @@ The [HORNET] Manifest Specification provides standardized formats for describing
 * 💾 **Consistency** — Schema validation ensures data integrity and prevents errors
 * 🧪 **Simulation-Ready** — Comprehensive preparation of CAD components for numerical analysis
 
-> ### 🔗 TL;DR
->
->**Creating CAD and Simulation Manifests:**
->
->1. **CAD Manifest** (`cad_manifest.json`) - Describes your CAD components, assemblies, and files
->   * Include `"$schema": "https://raw.githubusercontent.com/ITISFoundation/hornet-manifest-spec/refs/heads/main/schema/cad_manifest.schema.json"`
->   * Define components with IDs, types, descriptions, and file references
->
->2. **Simulation Manifest** (`sim_manifest.json`) - Prepares CAD components for simulation use
->   * Include `"$schema": "https://raw.githubusercontent.com/ITISFoundation/hornet-manifest-spec/refs/heads/main/schema/sim_manifest.schema.json"`
->   * Reference components from your CAD manifest and define their simulation context (materials, boundary conditions, etc.)
->
->3. **Validate** using VS Code, GitHub Actions, pre-commit hooks, or online tools
->   * All validation uses the same JSON Schemas for consistent results
+
+## 🔗 At a glance
+
+**Creating CAD and Simulation Manifests in your repository:**
 
 
+1. **CAD Manifest** (`.hornet/cad_manifest.json`) - Describes your CAD components, assemblies, and files
+   * Include `"$schema": "https://raw.githubusercontent.com/ITISFoundation/hornet-manifest-spec/refs/heads/main/schema/cad_manifest.schema.json"`
+   * Define components with IDs, types, descriptions, and file references
+
+2. **Simulation Manifest** (`.hornet/sim_manifest.json`) - Prepares CAD components for simulation use
+   * Include `"$schema": "https://raw.githubusercontent.com/ITISFoundation/hornet-manifest-spec/refs/heads/main/schema/sim_manifest.schema.json"`
+   * Reference components from your CAD manifest and define their simulation context (materials, boundary conditions, etc.)
+
+3. **Validate** using VS Code, GitHub Actions, pre-commit hooks, or online tools
+   * All validation uses the same JSON Schemas for consistent results
+
+4. **Github Topic** optionally add the topic [`#hornet-manifest`](https://github.com/topics/hornet-manifests) to [classify your github repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics)
+
+
+> NOTE: All manifest files (such as `cad_manifest.json` and `sim_manifest.json`) **must be placed inside a folder named `.hornet` at the root of your repository**. For  example: `.hornet/cad_manifest.json` and `.hornet/sim_manifest.json`.
+
+
+---
 
 ## 📋 What's in this Repository
 
@@ -68,13 +76,14 @@ This specification includes standardized vocabularies to ensure consistency:
 * [`vocab/boundary-conditions.json`](vocab/boundary-conditions.json) - Defines standardized boundary conditions for simulations (e.g., "electrical_contact", "insulating")
 
 These vocabularies:
+
 * Ensure consistent terminology across projects
 * Allow validation of correct tag/condition usage
 * Can be extended as needs evolve
 
 ### 💡 Simple Example
 
-Here's a minimal example of a valid `cad_manifest.json`:
+Here's a minimal example of a valid `.hornet/cad_manifest.json`:
 
 ```json
 {
@@ -104,11 +113,11 @@ Here's a minimal example of a valid `cad_manifest.json`:
 }
 ```
 
-For more complex examples, see the [`examples/`](examples/) directory.
+For more complex examples, see the [`examples/`](examples/) directory. In your own repository, always place your manifest files in the `.hornet/` folder.
 
 #### Simulation Manifest Example
 
-Here's a minimal example of a valid `sim_manifest.json`:
+Here's a minimal example of a valid `.hornet/sim_manifest.json`:
 
 ```json
 {
@@ -116,7 +125,7 @@ Here's a minimal example of a valid `sim_manifest.json`:
   "mappings": [
     {
       "component_ref": {
-        "cad_manifest_path": "./cad_manifest.json",
+        "cad_manifest_path": "./.hornet/cad_manifest.json",
         "component_id": "SimplePart"
       },
       "material": {
@@ -129,7 +138,7 @@ Here's a minimal example of a valid `sim_manifest.json`:
 }
 ```
 
-This example maps a CAD component to its simulation-specific context, defining material properties and boundary conditions needed for computational analysis.
+This example maps a CAD component to its simulation-specific context, defining material properties and boundary conditions needed for computational analysis. Note that the `cad_manifest_path` points to the manifest inside the `.hornet` folder.
 
 ### 🔄 Keeping Schemas and Vocabularies in Sync
 
@@ -145,7 +154,7 @@ The repository includes an automated sync mechanism:
 
 #### 1. ✅ In VS Code
 
-Ensure your manifest begins like this:
+Ensure your manifest is located in `.hornet/` and begins like this:
 
 ```json
 {
@@ -170,7 +179,7 @@ Add this workflow to [`.github/workflows/validate-manifest.yml`](.github/workflo
 - name: Extract schema URL
   id: get_schema
   runs: |
-    echo "::set-output name=url::$(jq -r .\"$schema\" cad_manifest.json)"
+    echo "::set-output name=url::$(jq -r .\"$schema\" .hornet/cad_manifest.json)"
 
 - name: Validate manifest
   uses: sourcemeta/jsonschema@v9
@@ -178,7 +187,7 @@ Add this workflow to [`.github/workflows/validate-manifest.yml`](.github/workflo
     command: validate
     args: >
       --schema ${{ steps.get_schema.outputs.url }}
-      --instance cad_manifest.json
+      --instance .hornet/cad_manifest.json
 ```
 
 This uses:
@@ -199,7 +208,7 @@ repos:
       - id: check-jsonschema
         name: Validate CAD Manifest
         args: ["--schemafile", "cad_manifest.schema.json"]
-        files: ^cad_manifest\.json$
+        files: ^\.hornet/cad_manifest\.json$
 ```
 
 This runs validation on staged edits to `cad_manifest.json` before commits.
