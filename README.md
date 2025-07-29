@@ -248,11 +248,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Copyright (c) 2025 IT'IS Foundation
 
-[HORNET]:https://www.ninds.nih.gov/current-research/research-funded-ninds/translational-research/translational-devices/human-open-research-neural-engineering-technologies-hornet-initiative
-
+[HORNET]:https://www.ninds.nih.gov/current-research/research-funded-ninds/translational-research/translational-devic
 
 <p align="center">
 <a href="https://www.z43.swiss" target="_blank">
-<image src="https://github.com/ITISFoundation/hornet-manifest-spec/blob/master/doc/_img/mwl.png?raw=true" alt="Made with lots of Love (and hard work) at www.z43.swiss" width="20%" />
+<image src="https://github.com/ITISFoundation/hornet-manifest-spec/blob/main/doc/img/mwl.png?raw=true" alt="Made with lots of Love (and hard work) at www.z43.swiss" width="20%" />
 </a>
 </p>
