@@ -25,7 +25,7 @@ The [HORNET] Manifest Specification provides standardized formats for describing
 3. **Validate** using VS Code, GitHub Actions, pre-commit hooks, or online tools
    * All validation uses the same JSON Schemas for consistent results
 
-4. **Github Topic** optionally add the topic [`#hornet-manifest`](https://github.com/topics/hornet-manifests) to [classify your github repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics)
+4. **Github Topic** optionally add the topic [`#hornet-manifests`](https://github.com/topics/hornet-manifests) to [classify your github repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics)
 
 
 > NOTE: All manifest files (such as `cad_manifest.json` and `sim_manifest.json`) **must be placed inside a folder named `.hornet` at the root of your repository**. For  example: `.hornet/cad_manifest.json` and `.hornet/sim_manifest.json`.
