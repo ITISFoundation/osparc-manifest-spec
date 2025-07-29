@@ -9,7 +9,7 @@ The [HORNET] Manifest Specification provides standardized formats for describing
 * 🧪 **Simulation-Ready** — Comprehensive preparation of CAD components for numerical analysis
 
 
-## 🔗 At a glance
+## 🔗 At a Glance
 
 **Creating CAD and Simulation Manifests in your repository:**
 
