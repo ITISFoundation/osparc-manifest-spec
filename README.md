@@ -248,7 +248,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Copyright (c) 2025 IT'IS Foundation
 
-[HORNET]:https://www.ninds.nih.gov/current-research/research-funded-ninds/translational-research/translational-devic
+[HORNET]:https://www.ninds.nih.gov/current-research/research-funded-ninds/translational-research/translational-devices/human-open-research-neural-engineering-technologies-hornet-initiative
 
 <p align="center">
 <a href="https://www.z43.swiss" target="_blank">
