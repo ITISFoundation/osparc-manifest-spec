@@ -1,31 +1,34 @@
-name: Validate CAD Manifest
-
+name: Validate CAD Manifests
 on:
   push:
     paths:
-        - 'examples/cad_manifest.json'
+      - 'examples/**cad_manifest.json'
+      - 'schema/cad_manifest.schema.json'
   pull_request:
     paths:
-        - 'examples/cad_manifest.json'
+      - 'examples/**cad_manifest.json'
+      - 'schema/cad_manifest.schema.json'
 
 jobs:
-  validate:
+  discover:
     runs-on: ubuntu-latest
-
+    outputs:
+      matrix: ${{ steps.find.outputs.matrix }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - id: find
+        run: |
+          echo "matrix=$(find examples -type f -name '*cad_manifest.json' | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
 
-      - name: Extract schema URL using jq
-        id: get_schema
-        uses: sergeysova/jq-action@v2
-        with:
-          cmd: "jq -r '.\"$schema\"' examples/cad_manifest.json"
-
-      - name: Validate manifest against JSON Schema
-        uses: sourcemeta/jsonschema@v9.2.1
-        with:
-          command: validate
-          args: >
-            --schema ${{ steps.get_schema.outputs.value }}
-            --instance examples/cad_manifest.json
+  validate:
+    needs: discover
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        file: ${{ fromJson(needs.discover.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install JSON Schema CLI
+        uses: sourcemeta/jsonschema@v11.0.0
+      - name: Validate Manifest
+        run: jsonschema validate schema/cad_manifest.schema.json "${{ matrix.file }}" --json
