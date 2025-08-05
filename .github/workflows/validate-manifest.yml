@@ -28,11 +28,7 @@ jobs:
         file: ${{ fromJson(needs.discover.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v3
-
-      - name: Validate manifest against schema
+      - name: Install JSON Schema CLI
         uses: sourcemeta/jsonschema@v11.0.0
-        with:
-          command: validate
-          args: >
-            schema/cad_manifest.schema.json
-            "${{ matrix.file }}"
+      - name: Validate Manifest
+        run: jsonschema validate schema/cad_manifest.schema.json "${{ matrix.file }}"
